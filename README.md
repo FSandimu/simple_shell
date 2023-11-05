@@ -34,3 +34,7 @@ $ cat test_ls_2 | ./hsh
 hsh main.c shell.c test_ls_2
 hsh main.c shell.c test_ls_2
 $
+
+`simple_shell.c` - carries the main function
+`simple_shell.h` - headerr file
+`display.c`

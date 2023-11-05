@@ -7,7 +7,7 @@
  * main - Entry point to the program
  * Return: 0
  */
-int main(void)
+int get_pid(void)
 {
 	pid_t parent_pid;
 	pid_t child_pid;
