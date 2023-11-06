@@ -8,7 +8,13 @@
 #include <sys/wait.h>
 
 #define MAX_INPUT_SIZE 1024
-void display_prompt(void);
+#define MAX_ARGS 32
+extern char **environ;
+/**
+ * the above variable is the environment variable which is from unistd,h*/
+void execute_command_with_args(char *command);
 void execute_command(char *command);
+char *find_command(char *command);
+void display_prompt(void);
 
 #endif
