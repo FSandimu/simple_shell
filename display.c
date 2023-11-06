@@ -14,7 +14,13 @@ void display_prompt()
  * note : environ variable is defined in the header file
  *
  * basically this impliments task index o2
+ *
+ *
+ *
+ *
+ * TODO : CHECK BETTY 
  */
+
 
 
 
