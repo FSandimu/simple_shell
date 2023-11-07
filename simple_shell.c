@@ -16,6 +16,10 @@ int main(void)
 			printf("\n");
 			break;
 		}
+		if (strcmp(input, "env") == 0)
+		{
+			executeEnv(environ);
+		}
 
 		input[strcspn(input, "\n")] = '\0';
 		execute_command(input);

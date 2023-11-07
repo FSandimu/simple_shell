@@ -16,5 +16,6 @@ void execute_command_with_args(char *command);
 void execute_command(char *command);
 char *find_command(char *command);
 void display_prompt(void);
+void executeEnv(char *environ[]);
 
 #endif

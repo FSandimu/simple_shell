@@ -12,19 +12,19 @@
 char *find_command(char *command)
 {
 	char *path = getenv("PATH");
-	
-	
+
 	char *token = strtok(path, ":");
-	
+
 	while (token != NULL)
 	{
 		char full_path[MAX_INPUT_SIZE];
+
 		snprintf(full_path, sizeof(full_path), "%s/%s", token, command);
 		if (access(full_path, X_OK) == 0)
 		{
-			return strdup(full_path);
+			return (strdup(full_path));
 		}
 		token = strtok(NULL, ":");
 	}
-	return NULL;
+	return (NULL);
 }

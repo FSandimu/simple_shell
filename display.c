@@ -3,10 +3,31 @@
  * display_prompt - this is the function that displays the prompt to the user
  * Return: void
  */
-void display_prompt()
+void display_prompt(void)
 {
 	printf("$ ");
+
+
 }
+/**
+ * executeEnv - Print the current environment variables.
+ * @environ:  the environmrnt
+ */
+
+
+
+
+void executeEnv(char *environ[])
+{
+	int i;
+
+	while (environ[i] != NULL)
+	{
+		printf("%s\n",  environ[i]);
+		i++;
+	}
+}
+
 /**
  * execute_command_with_args - its the fuction i implement to handle cmd args
  * @command: the cmd to be handled
@@ -18,10 +39,8 @@ void display_prompt()
  *
  *
  *
- * TODO : CHECK BETTY 
+ * TODO : CHECK BETTY
  */
-
-
 
 
 void execute_command_with_args(char *command)
@@ -30,7 +49,7 @@ void execute_command_with_args(char *command)
 	char *full_path;
 	int arg_count = 0;
 	char *token = strtok(command, " ");
-	
+
 	while (token != NULL)
 	{
 		args[arg_count] = token;
@@ -64,7 +83,14 @@ void execute_command_with_args(char *command)
 
 void execute_command(char *command)
 {
-	/*
+	 pid_t pid;
+
+
+	if (strcmp(command, "exit") == 0)
+	{
+		exit(0);
+	}
+	/**
 	 * char *full_command = find_command(command);
 
 	pid_t pid;
@@ -73,12 +99,10 @@ void execute_command(char *command)
 	{
 		fprintf(stderr, "%s: command not found\n", command);
 		return;
-	}* the above code is hashed since it breaks the execution implemets task 3 (ii)
+	}* the aboveis hashed since it breaks the execution implemets task 3 (ii)
 	* TODO implement it and also do betty on this file
 	*/
-
-	pid_t pid = fork();
-	
+	 pid = fork();
 	if (pid == -1)
 	{
 		perror("Fork failed");
@@ -90,11 +114,11 @@ void execute_command(char *command)
 	else
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 		{
 			WEXITSTATUS(status);
-			
 		}
 	}
 }
