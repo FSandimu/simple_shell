@@ -4,7 +4,7 @@
 #include <unistd.h>
 
 /**
- * main - Entry point to the program
+ * get_pid - Entry point to the program
  * Return: 0
  */
 int get_pid(void)
