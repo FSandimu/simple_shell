@@ -13,9 +13,9 @@ extern char **environ;
 /**
  * the above variable is the environment variable which is from unistd,h*/
 void execute_command_with_args(char *command);
-void execute_command(char *command);
-char *find_command(char *command);
+
 void display_prompt(void);
+void execute_command_with_path(char *full_path, char *args[]);
 void executeEnv(char *environ[]);
 
 #endif
