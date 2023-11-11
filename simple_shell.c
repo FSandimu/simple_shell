@@ -34,12 +34,11 @@ int main(void)
 		{
 			exit(0);
 			break;
-			return (-1);
 		}
 		input[strcspn(input, "\n")] = '\0';
-		if (strcmp(input, "exit") == 0)
+		if (strlen(input) == 0)
 		{
-			exit(0);
+			continue;
 		}
 
 		/*execute_command(input);*/

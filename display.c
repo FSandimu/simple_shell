@@ -19,7 +19,7 @@ void execute_command_with_args(char *command)
 	char *args[MAX_ARGS];
 	int arg_count = 0;
 	char *token = strtok(command, " ");
-	char *full_path;
+	char *full_path = NULL;
 
 	while (token != NULL)
 	{
@@ -28,6 +28,8 @@ void execute_command_with_args(char *command)
 		arg_count++;
 	}
 	args[arg_count] = NULL;
+	if (arg_count > 0 && strcmp(args[0], "exit") == 0)
+		exit(0);
 	if (args[0][0] == '/' || args[0][0] == '.')
 	{
 		full_path = args[0];
@@ -67,6 +69,13 @@ void execute_command_with_path(char *full_path, char *args[])
 {
 	pid_t pid;
 	int status;
+	if (full_path == NULL)
+	{
+		fprintf(stderr, "Command not found\n");
+		exit(EXIT_FAILURE);
+	}
+
+	printf("Executing command: %s\n", full_path);
 
 	pid = fork();
 	if (pid == -1)
