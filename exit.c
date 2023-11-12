@@ -1,5 +1,4 @@
 #include "simple_shell.h"
-
 /**
  * exit_builtin - exits the shell
  * Return: zero
