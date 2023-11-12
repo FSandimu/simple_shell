@@ -17,7 +17,7 @@ void env_builtin()
     }
 }
 
-int main(void)
+/*int main(void)
 {
     char input[MAX_LENGTH];
 
@@ -31,4 +31,4 @@ int main(void)
     }
 
     return 0;
-}
+}*/

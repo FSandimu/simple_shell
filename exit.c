@@ -4,7 +4,7 @@
  * exit_builtin - exits the shell
  * Return: zero
  */
-void exit_builtin(void)
+/*void exit_builtin(void)
 {
 	exit(0);
 }
@@ -25,4 +25,4 @@ int main(void)
     }
 
 	return (0);
-}
+}*/

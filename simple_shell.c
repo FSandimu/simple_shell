@@ -8,11 +8,13 @@
 
 int main(void)
 {
-	char input[MAX_INPUT_SIZE];
+	/*char input[MAX_INPUT_SIZE];*/
+	char *input = NULL;
+	size_t input_size = 0;
 	char *custom_path = "/bin";
 	char *path = getenv("PATH");
 	char new_path[MAX_INPUT_SIZE];
-
+	ssize_t chars_read;
 	if (path == NULL)
 	{
 		snprintf(new_path, sizeof(new_path), "PATH=%s", custom_path);
@@ -25,26 +27,26 @@ int main(void)
 	while (1)
 	{
 		display_prompt();
-		if (fgets(input, sizeof(input), stdin) == NULL)
+		chars_read = custom_getline(&input, &input_size);
+		if (chars_read == -1)
 		{
 			printf("\n");
-			break;
+			free(input);
+			exit(EXIT_FAILURE);
 		}
-		if (strcmp(input, "exit") == 0)
-		{
-			exit(0);
-			break;
-		}
-		input[strcspn(input, "\n")] = '\0';
-		if (strlen(input) == 0)
+		if (chars_read == 0)
 		{
 			continue;
 		}
-
-		/*execute_command(input);*/
+		if (strcmp(input, "exit") == 0)
+		{
+			free(input);
+			exit(EXIT_SUCCESS);
+		}
 		execute_command_with_args(input);
 
 	}
+	free(input);
 	return (0);
 }
 

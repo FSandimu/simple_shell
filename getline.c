@@ -1,59 +1,54 @@
 #include "simple_shell.h"
 
-/**
- * getline - prints a line
- * @buf: line to be printed
- * Return: void
- */
-void getline(char *buf)
+
+
+
+ssize_t custom_getline(char **lineptr, size_t *n)
 {
-	int i = 0;
-	while (1)
+	size_t pos = 0;
+	int c;
+
+	if (*lineptr == NULL)
 	{
-		char c = getchar();
-		if (c == '\n' || c == EOF)
+		*lineptr = (char *)malloc(MAX_INPUT_SIZE);
+		if (*lineptr == NULL)
 		{
-			buf[i] = '\0';
-			break;
+			perror("malloc");
+			exit(EXIT_FAILURE);
 		}
-	buf[i++] = c;
+		*n = MAX_INPUT_SIZE;
 	}
-}
-
-int main(void)
-{
-	char input[MAX_LENGTH];
-
 	while (1)
 	{
-		printf("$ ");
-		getline(input);
-
-		if (strncmp(input, "exit", 4) == 0)
+		c = getchar();
+		if (c == EOF)
 		{
-			break;
-		}
-		pid_t pid = fork();
-
-		if (pid == 0)
-		{
-			char *argv[] = {"sh", "-c", input, NULL};
-			if (execv("/bin/sh", argv) == -1)
+			if (pos == 0)
 			{
-				perror("execv");
+				free(*lineptr);
+				*lineptr = NULL;
+				return (-1);
 			}
-			exit(0);
+			(*lineptr)[pos] = '\0';
+			return (pos);
 		}
-		else if (pid < 0)
+		if (c == '\n')
 		{
-			perror("fork");
+			(*lineptr)[pos] = '\0';
+			return (pos);
 		}
-		else
+		(*lineptr)[pos] = c;
+		pos++;
+		if (pos >= *n - 1)
 		{
-			int status;
-			waitpid(pid, &status, 0);
+			*n *= 2;
+			*lineptr = realloc(*lineptr, *n);
+			if (*lineptr == NULL)
+			{
+				perror("realloc");
+				exit(EXIT_FAILURE);
+			}
 		}
 	}
-	return 0;
+	return (-1);
 }
-
