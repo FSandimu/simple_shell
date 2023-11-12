@@ -1,54 +1,49 @@
 #include "simple_shell.h"
 
-/**
- *
- *
- *
- */
 
-int execute_setenv(char **args)
+
+/**
+ * execute_setenv - Set environment variable.
+ * @args: Array of arguments containing variable name and value.
+ */
+void execute_setenv(char *args[])
 {
+	int success;
 	if (args[1] == NULL || args[2] == NULL)
 	{
-		printf(stderr, "Usage: setenv VARIABLE VALUE\n");
-		return (1);
+		fprintf(stderr, "Usage: setenv VARIABLE VALUE\n");
+		return;
 	}
-
-	if (setenv(args[1], args[2], 1) == -1)
+	success = setenv(args[1], args[2], 1);
+	if (success == 0)
+	{
+		printf("Variable %s set to %s\n", args[1], args[2]);
+	}
+	else
 	{
 		perror("setenv");
-		return (1);
 	}
-
-	return (0);
-}
-
-int execute_unsetenv(char **args)
-{
-	if (args[1] == NULL)
-	{
-		printf(stderr, "Usage: unsetenv VARIABLE\n");
-		return (1);
-	}
-
-	if (unsetenv(args[1]) == -1)
-	{
-		perror("unsetenv");
-		return (1);
-	}
-
-	return (0);
 }
 
 /**
- * int main(void)
+ * execute_unsetenv - Unset environment variable.
+ * @args: Array of arguments containing variable name.
+ */
+void execute_unsetenv(char *args[])
 {
-	char *args[] = {"setenv", "GREETING", "Hello, World!"};
-	execute_setenv(args);
-
-	args[0] = "unsetenv";
-	args[1] = "GREETING";
-	execute_unsetenv(args);
-
-	return (0);
-}*/
+	if (args[0] != NULL && args[1] != NULL && args[2] == NULL && args[1][0] != '\0')
+	{
+		if (unsetenv(args[1]) == -1)
+		{
+			perror("unsetenv");
+		}
+		else
+		{
+			printf("Variable %s unset\n", args[1]);
+		}
+	}
+	else
+	{
+		fprintf(stderr, "Usage: unsetenv VARIABLE\n");
+	}
+}

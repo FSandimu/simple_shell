@@ -18,31 +18,30 @@ void execute_command_with_args(char *command)
 {
 	char *args[MAX_ARGS];
 	int arg_count = 0;
-	char *token = strtok(command, " ");
 	char *full_path = NULL;
 
-	while (token != NULL)
-	{
-		args[arg_count] = token;
-		token = strtok(NULL, " ");
-		arg_count++;
-	}
-	args[arg_count] = NULL;
+	custom_tokenize(command, args, &arg_count);
 	if (arg_count > 0 && strcmp(args[0], "exit") == 0)
-		exit(0);
+		execute_exit(arg_count, args);
+	else if (arg_count > 0 && strcmp(args[0], "setenv") == 0)
+                execute_setenv(args);
+	else if (arg_count > 0 && strcmp(args[0], "unsetenv") == 0)
+		execute_unsetenv(args);
 	if (args[0][0] == '/' || args[0][0] == '.')
-	{
 		full_path = args[0];
-	}
 	else
 	{
 		char *path = getenv("PATH");
-		char *path_token = strtok(path, ":");
+		char *path_copy = strdup(path);
+		char *path_token = path_copy;
 
 		while (path_token != NULL)
 		{
 			char full_path_candidate[MAX_INPUT_SIZE];
+			char *token_end = strchr(path_token, ':');
 
+			if (token_end != NULL)
+				*token_end = '\0';
 			snprintf(full_path_candidate,
 					sizeof(full_path_candidate), "%s/%s", path_token, args[0]);
 			if (access(full_path_candidate, X_OK) == 0)
@@ -50,8 +49,11 @@ void execute_command_with_args(char *command)
 				full_path = full_path_candidate;
 				break;
 			}
-			path_token = strtok(NULL, ":");
+			if (token_end == NULL)
+				break;
+			path_token = token_end + 1;
 		}
+		free(path_copy);
 	}
 	if (full_path != NULL)
 		execute_command_with_path(full_path, args);
@@ -69,6 +71,7 @@ void execute_command_with_path(char *full_path, char *args[])
 {
 	pid_t pid;
 	int status;
+
 	if (full_path == NULL)
 	{
 		fprintf(stderr, "Command not found\n");

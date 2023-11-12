@@ -18,7 +18,6 @@ void cd(char *path)
 		setenv("PWD", new_pwd, 1);
 	}
 }
-
 int main(void)
 {
 	char *input = "cd /path/to/directory";
@@ -35,4 +34,4 @@ int main(void)
 	}
 
 	return (0);
-}
+	}

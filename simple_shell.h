@@ -14,7 +14,11 @@ extern char **environ;
  * the above variable is the environment variable which is from unistd,h*/
 void execute_command_with_args(char *command);
 ssize_t custom_getline(char **lineptr, size_t *n);
+void execute_unsetenv(char *args[]);
+void execute_setenv(char *args[]);
 
+void execute_exit(int argc, char *argv[]);
+void custom_tokenize(char *input, char *args[], int *arg_count);
 
 void display_prompt(void);
 void execute_command_with_path(char *full_path, char *args[]);

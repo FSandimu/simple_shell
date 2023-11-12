@@ -1,4 +1,4 @@
-#include "simple_simple.h"
+#include "simple_shell.h"
 
 /**
  *
@@ -36,7 +36,7 @@ void exec_cmd(char *cmd)
 	}
 }
 
-int main(void)
+/*int main(void)
 {
 	//assume you have already implemented a command parser and other utilities
 	char *input = "cd /path/to/directory; ls";
@@ -49,4 +49,4 @@ int main(void)
 	}
 
 	return (0);
-}
+}*/
