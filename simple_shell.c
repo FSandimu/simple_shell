@@ -15,6 +15,8 @@ int main(void)
 	char *path = getenv("PATH");
 	char new_path[MAX_INPUT_SIZE];
 	ssize_t chars_read;
+
+
 	if (path == NULL)
 	{
 		snprintf(new_path, sizeof(new_path), "PATH=%s", custom_path);
