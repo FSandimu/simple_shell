@@ -1,8 +1,5 @@
 #include "simple_shell.h"
 
-
-
-
 ssize_t custom_getline(char **lineptr, size_t *n)
 {
 	size_t pos = 0;
