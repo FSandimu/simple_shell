@@ -34,7 +34,20 @@ $ cat test_ls_2 | ./hsh
 hsh main.c shell.c test_ls_2
 hsh main.c shell.c test_ls_2
 $
+- **simple_shell.c**: Contains the main function.
+- **simple_shell.h**: Header file for function declarations.
+- **display.c**: Handles the display of the shell prompt and related functions.
+- **getline.c**: Implements a custom `getline` function for reading user input
 
-`simple_shell.c` - carries the main function
-`simple_shell.h` - headerr file
-`display.c`
+## Compilation
+Compile your shell using the following command:
+
+```bash
+gcc -Wall -Werror -Wextra -pedantic -std=gnu89 *.c -o hsh
+
+then 
+```bash
+./hsh
+
+
+
