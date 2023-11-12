@@ -25,3 +25,15 @@ int main(void)
 
 	return (0);
 }*/
+void execute_exit(int argc, char *argv[])
+{
+	if (argc > 1)
+	{
+		int status = atoi(argv[1]);
+		exit(status);
+	}
+	else
+	{
+		exit(EXIT_SUCCESS);
+	}
+}
