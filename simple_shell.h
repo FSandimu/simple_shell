@@ -16,10 +16,11 @@ void execute_command_with_args(char *command);
 ssize_t custom_getline(char **lineptr, size_t *n);
 void execute_unsetenv(char *args[]);
 void execute_setenv(char *args[]);
-
+void allocate_buffer(char **lineptr, size_t *n);
 void execute_exit(int argc, char *argv[]);
 void custom_tokenize(char *input, char *args[], int *arg_count);
-
+void execute_cd(char *args[]);
+void find_full_paths(char *args[], char *full_path);
 void display_prompt(void);
 void execute_command_with_path(char *full_path, char *args[]);
 void executeEnv(char *environ[]);

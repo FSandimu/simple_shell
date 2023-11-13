@@ -1,37 +1,52 @@
 #include "simple_shell.h"
 
+
+
 /**
+ * execute_cd - Change the current working directory and update env variabl
+ * @args: An array of command arguments, where args[1] is the target directory.
  *
- *
- *
+ * Return: No explicit return value.
  */
-void cd(char *path)
+void execute_cd(char *args[])
 {
-	if (chdir(path) != 0)
+	char current_dir[MAX_INPUT_SIZE];
+	char new_dir[MAX_INPUT_SIZE];
+	char *target_dir;
+	char *cwd;
+
+	if (args[1] == NULL || strcmp(args[1], "~") == 0)
+	{
+		target_dir = getenv("HOME");
+	}
+	else if (strcmp(args[1], "-") == 0)
+	{
+		target_dir = getenv("OLDPWD");
+	}
+	else
+	{
+		target_dir = args[1];
+	}
+	if (getcwd(current_dir, sizeof(current_dir)) == NULL)
+	{
+		perror("getcwd");
+		return;
+	}
+	if (chdir(target_dir) != 0)
 	{
 		perror("cd");
 	}
 	else
 	{
-		char new_pwd[1024];
-		getcwd(new_pwd, sizeof(new_pwd));
-		setenv("PWD", new_pwd, 1);
+		setenv("OLDPWD", current_dir, 1);
+		cwd = getcwd(new_dir, sizeof(new_dir));
+		if (cwd == NULL)
+		{
+			perror("getcwd");
+			return;
+		}
+		setenv("PWD", cwd, 1);
 	}
 }
-int main(void)
-{
-	char *input = "cd /path/to/directory";
-	char *cmd = strtok(input, " ");
-	char *path = strtok(NULL, " ");
 
-	if (strcmp(cmd, "cd") == 0)
-	{
-		if (path == NULL)
-		{
-			path = getenv("HOME");
-		}
-		cd(path);
-	}
 
-	return (0);
-	}

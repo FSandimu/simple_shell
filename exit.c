@@ -5,7 +5,7 @@
  * @argv: Array of arguments.
  *
  * Description:
- * - If an argument is provided, convert it to an integer and use it as the exit status.
+ * - If an arg is provided, convert it to an int to use it as the exit status.
  * - If no argument is provided, use the default exit status (EXIT_SUCCESS).
  */
 void execute_exit(int argc, char *argv[])
@@ -18,11 +18,10 @@ void execute_exit(int argc, char *argv[])
 		exit(status);
 	}
 	else
-	
 	{
 		exit(EXIT_SUCCESS);
 	}
 
 	printf("$ exit %d\n", status);
-    exit(status);
+	exit(status);
 }

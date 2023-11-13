@@ -40,18 +40,6 @@ int main(void)
 		{
 			continue;
 		}
-		/*if (strcmp(chars_read, "exit") == 0)
-		{
-			execute_exit(0, NULL);
-			free(input);
-			exit(EXIT_SUCCESS);
-		}		
-		
-		if (strcmp(chars_read, "setenv") == 0)
-			execute_setenv(chars_read);
-
-		if (strcmp(chars_read, "unsetenv") == 0)
-			execute_unsetenv(chars_read);*/
 		execute_command_with_args(input);
 
 	}
