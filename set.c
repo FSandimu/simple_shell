@@ -9,6 +9,7 @@
 void execute_setenv(char *args[])
 {
 	int success;
+
 	if (args[1] == NULL || args[2] == NULL)
 	{
 		fprintf(stderr, "Usage: setenv VARIABLE VALUE\n");
@@ -31,7 +32,8 @@ void execute_setenv(char *args[])
  */
 void execute_unsetenv(char *args[])
 {
-	if (args[0] != NULL && args[1] != NULL && args[2] == NULL && args[1][0] != '\0')
+	if (args[0] != NULL && args[1] != NULL && args[2]
+			== NULL && args[1][0] != '\0')
 	{
 		if (unsetenv(args[1]) == -1)
 		{

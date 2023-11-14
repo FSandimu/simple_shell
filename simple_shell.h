@@ -10,8 +10,12 @@
 #define MAX_INPUT_SIZE 1024
 #define MAX_ARGS 32
 extern char **environ;
+
 /**
- * the above variable is the environment variable which is from unistd,h*/
+ * execute_command_with_args - Executes a command with arguments.
+ *
+ * @command: The command to be executed.
+ */
 void execute_command_with_args(char *command);
 ssize_t custom_getline(char **lineptr, size_t *n);
 void execute_unsetenv(char *args[]);

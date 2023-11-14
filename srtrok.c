@@ -25,6 +25,7 @@ int execute_command(char *command)
 	else
 	{
 		int status;
+
 		waitpid(pid, &status, 0);
 	}
 

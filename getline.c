@@ -1,6 +1,6 @@
 #include "simple_shell.h"
 /**
- * custom_getline - Read a line from strd input and store it in a dynamically allocated buffer.
+ * custom_getline - Read line from strd input store it in a dynamic buffer.
  * @lineptr: A pointer to the buffer where the line will be stored.
  * @n: A pointer to the size of the buffer.
  *

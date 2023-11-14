@@ -12,7 +12,7 @@ void custom_tokenize(char *input, char *args[], int *arg_count)
 {
 	char *start = input;
 	char *end = input;
-	
+
 	while (*end != '\0' && *arg_count < MAX_ARGS - 1)
 	{
 		while (*end != ' ' && *end != '\0')
